@@ -11,6 +11,9 @@ public class Tile : MonoBehaviour
     Button _button;
     TextMeshProUGUI _text;
     Image _image;
+
+    public Image Image { get => _image; set => _image = value; }
+
     private void Awake()
     {
         _button = GetComponent<Button>();
@@ -33,6 +36,7 @@ public class Tile : MonoBehaviour
     public void DeactivateButton()
     {
         _button.interactable= false;
+        _text.SetText("<b>" + _text.text + "</b>");
     }
     void HandleTileButton()
     {
@@ -41,7 +45,7 @@ public class Tile : MonoBehaviour
     void GetSelected()
     {
         //change colour
-        _image.color = new Color(1f,0.8f,0.77f);
+        _image.color = Color.cyan;
         TileActions.Instance.SelectTile(this);
 
     }
@@ -49,7 +53,6 @@ public class Tile : MonoBehaviour
     {
         _image.color = Color.white;
     }
-
     void DebugTile()
     {
         Debug.Log("Row: " + Row.ToString());

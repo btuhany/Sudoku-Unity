@@ -1292,7 +1292,7 @@ MonoBehaviour:
   _tilePrefab: {fileID: 4631877693482292794, guid: 5e5af4561fe4ead4d81f09c1b44be83f, type: 3}
   _borderPrefab: {fileID: 6295428228040057504, guid: 5da1e434dc2742646a4da204fda01673, type: 3}
   _bordersParentTransform: {fileID: 875881354}
-  _borderWidth: 0.1
+  _borderWidth: 0.06
 --- !u!1 &2012208002
 GameObject:
   m_ObjectHideFlags: 0

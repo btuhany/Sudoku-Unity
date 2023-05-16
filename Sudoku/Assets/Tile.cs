@@ -10,15 +10,17 @@ public class Tile : MonoBehaviour
 
     Button _button;
     TextMeshProUGUI _text;
-    bool _isSelected;
+    Image _image;
     private void Awake()
     {
         _button = GetComponent<Button>();
         _text = GetComponentInChildren<TextMeshProUGUI>();
+        _image = GetComponent<Image>();
     }
     private void OnEnable()
     {
         _button.onClick.AddListener(() => HandleTileButton());
+    
     }
     public void SetNumber(int number)
     {
@@ -28,31 +30,26 @@ public class Tile : MonoBehaviour
         else
             _text.SetText(Number.ToString());
     }
+    public void DeactivateButton()
+    {
+        _button.interactable= false;
+    }
     void HandleTileButton()
     {
-        if(_isSelected)
-        {
-            _isSelected = false;
-            SelectedStateProcess();
-        }
-        else
-        {
-            _isSelected = true;
-            UnselectedStateProcess();
-        }
+        GetSelected();
     }
-    void UnselectedStateProcess()
+    void GetSelected()
     {
         //change colour
+        _image.color = new Color(1f,0.8f,0.77f);
         TileActions.Instance.SelectTile(this);
 
     }
-    void SelectedStateProcess()
+    public void GetUnselected()
     {
-        //change colour
-        TileActions.Instance.UnselectTile();
-
+        _image.color = Color.white;
     }
+
     void DebugTile()
     {
         Debug.Log("Row: " + Row.ToString());

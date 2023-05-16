@@ -16,6 +16,11 @@ public class TileManager : MonoBehaviour
     {
         _gridGroup = GetComponent<GridLayoutGroup>();
     }
+    private void OnEnable()
+    {
+        GameManager.Instance.OnGameStart += HandleOnGameStart;
+    }
+
     private void Start()
     {
         InstantiateTiles();
@@ -28,8 +33,8 @@ public class TileManager : MonoBehaviour
             for (int j = 0; j < 9; j++)
             {
                 Tile newTile = Instantiate(_tilePrefab, this.transform);
-                newTile.Row = i + 1;
-                newTile.Column = j + 1;
+                newTile.Row = i+1;
+                newTile.Column = j+1;
                 newTile.SetNumber(-1);
                 _tiles[i, j] = newTile;
             }
@@ -56,5 +61,19 @@ public class TileManager : MonoBehaviour
                 border.transform.position = new Vector3(this.transform.position.x , this.transform.position.y + _gridGroup.cellSize.y * 1.5f, 0);
         }
 
+    }
+    void HandleOnGameStart()
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j <9; j++)
+            {
+                if (_tiles[i, j].Number > 0)
+                {
+                    _tiles[i, j].DeactivateButton();
+                    
+                }
+            }
+        }
     }
 }

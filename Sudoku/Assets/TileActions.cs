@@ -13,11 +13,21 @@ public class TileActions : MonoBehaviour
     }
     public void SelectTile(Tile selectedTile)
     {
-        SelectedTile = selectedTile;
-    }
-    public void UnselectTile()
-    {
-        SelectedTile = null;
+        if (SelectedTile == selectedTile)
+        {
+            selectedTile.GetUnselected();
+            SelectedTile= null;
+        }
+        else if(SelectedTile)
+        {
+            SelectedTile.GetUnselected();
+            SelectedTile = selectedTile;
+        }
+        else
+        {
+            SelectedTile = selectedTile;
+        }
+      
     }
     public void AssignNumberToTile(int number)
     {
